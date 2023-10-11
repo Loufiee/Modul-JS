@@ -1,0 +1,53 @@
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card col-sm-12">
+                    <div class="card-header bg-success text-white">
+                        <h4>Alert Setting</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <label for="teks">Teks</label>
+                            <input type="text" id="teks" class="form-control">
+                            <label for="alertTypeDropdown">Background setting</label>
+                            <select id="alertTypeDropdown" class="form-control">
+                                <option value="light">Default</option>
+                                <option value="primary">Primary</option>
+                                <option value="danger">Danger</option>
+                                <option value="warning">Warning</option>
+                                <option value="success">Success</option>
+                                <option value="dark">Dark</option>
+                                <option value="secondary">Secondary</option>
+                            </select>
+                            <button type="button" class="btn btn-success btn-block" onclick="ChangeBackground();">Terapkan</button>
+                        </form>
+                        <div id="pesan" class="alert alert-light">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="class.js"></script>
+</body>
+</html>
+
+JS
+function ChangeBackground() {
+    var element = document.getElementById('pesan');
+    var dropdown = document.getElementById('alertTypeDropdown');
+    element.className = "alert alert-" + dropdown.value;
+
+    var customMessage = document.getElementById('teks').value;
+    element.innerHTML = ` ${customMessage}`;
+}
