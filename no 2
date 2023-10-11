@@ -1,0 +1,86 @@
+HTML
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penyetelan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card col-sm-4">
+                <div class="card-header"><h4>Penyetelan</h4></div>
+                <div class="card-body">
+                    Lebar (0-100)
+                    <input type="number" id="panjang" class="form-control" min="0" max="100">
+                    Tinggi (0-100)
+                    <input type="number" id="lebar" class="form-control" min="0" max="100">
+                    Latar Belakang
+                    <input type="color" id="warna" class="form-control">
+                    Teks pada Latar Belakang
+                    <input type="text" id="teks" class="form-control">
+                    <input type="text" id="ukuranTeks" placeholder="Ukuran Teks (px)">
+                    <button type="button" class="btn btn-success btn-block" onclick="EditStyle();">Terapkan</button>
+                </div>
+            </div>
+
+            <div class="card col-sm-8">
+                <div class="card-header">Hasil</div>
+                <div class="card-body">
+                  <div id="square" style="position: relative;">
+                    <div id="background-text"></div>
+                  </div>
+              </div>
+        </div>
+    </div>
+    <script src="edit.js"></script>
+</body>
+</html>
+
+JS
+function EditStyle() {
+  const panjangInput = document.getElementById('panjang');
+  const lebarInput = document.getElementById('lebar');
+  const warna = document.getElementById('warna').value;
+  const teksInput = document.getElementById('teks').value; // Mengambil nilai teks dari input
+  const ukuranTeksInput = document.getElementById('ukuranTeks').value; // Mengambil nilai ukuran teks dari input
+
+  let panjang = parseFloat(panjangInput.value);
+  let lebar = parseFloat(lebarInput.value);
+
+  if (panjang < 0 || isNaN(panjang)) {
+    panjangInput.value = '';
+    panjang = 0;
+  }
+
+  if (lebar < 0 || isNaN(lebar)) {
+    lebarInput.value = '';
+    lebar = 0;
+  }
+
+  if (panjang > 100) {
+    panjangInput.value = '100';
+    panjang = 100;
+  }
+
+  if (lebar > 100) {
+    lebarInput.value = '100';
+    lebar = 100;
+  }
+
+  const square = document.getElementById('square');
+  square.style.width = panjang + '%';
+  square.style.height = lebar + '%';
+  square.style.backgroundColor = warna;
+  square.style.color = 'white'; 
+  square.style.textAlign = 'center'
+
+  if (ukuranTeksInput) {
+    square.style.fontSize = ukuranTeksInput + 'px'; 
+  }
+
+  // Menambahkan teks ke dalam latar belakang
+  square.innerText = teksInput; // Menambahkan teks dari input ke dalam elemen "square"
+}
